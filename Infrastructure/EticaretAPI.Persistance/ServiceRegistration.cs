@@ -10,18 +10,18 @@ namespace EticaretAPI.Persistance
         public static void AddPersistenceServices(this IServiceCollection services)
         {
             services.AddDbContext<EticaretAPIDbContext>(options =>
-                options.UseSqlServer(Configuration.ConnectionString), ServiceLifetime.Singleton);
+                options.UseSqlServer(Configuration.ConnectionString));
 
-            services.AddSingleton<ICategoryReadRepository, CategoryReadRepository>();
-            services.AddSingleton<ICategoryWriteRepository, CategoryWriteRepository>();
-            services.AddSingleton<ICustomerReadRepository, CustomerReadRepository>();
-            services.AddSingleton<ICustomerWriteRepository, CustomerWriteRepository>();
-            services.AddSingleton<IOrderReadRepository, OrderReadRepository>();
-            services.AddSingleton<IOrderWriteRepository, OrderWriteRepository>();
-            services.AddSingleton<IOrderProductReadRepository, OrderProductReadRepository>();
-            services.AddSingleton<IOrderProductWriteRepository, OrderProductWriteRepository>();
-            services.AddSingleton<IShopAssistantReadRepository, ShopAssistantReadRepository>();
-            services.AddSingleton<IShopAssistantWriteRepository, ShopAssistantWriteRepository>();
+            services.AddScoped<ICategoryReadRepository, CategoryReadRepository>();
+            services.AddScoped<ICategoryWriteRepository, CategoryWriteRepository>();
+            services.AddScoped<ICustomerReadRepository, CustomerReadRepository>();
+            services.AddScoped<ICustomerWriteRepository, CustomerWriteRepository>();
+            services.AddScoped<IOrderReadRepository, OrderReadRepository>();
+            services.AddScoped<IOrderWriteRepository, OrderWriteRepository>();
+            services.AddScoped<IOrderProductReadRepository, OrderProductReadRepository>();
+            services.AddScoped<IOrderProductWriteRepository, OrderProductWriteRepository>();
+            services.AddScoped<IShopAssistantReadRepository, ShopAssistantReadRepository>();
+            services.AddScoped<IShopAssistantWriteRepository, ShopAssistantWriteRepository>();
         }
     }
 }
