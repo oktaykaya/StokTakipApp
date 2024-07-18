@@ -11,3 +11,4 @@ namespace EticaretAPI.Domain.Entities.Common
         public int Id { get; set; }
     }
 }
+ 
