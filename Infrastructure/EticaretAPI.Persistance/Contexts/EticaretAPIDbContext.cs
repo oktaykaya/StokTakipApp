@@ -1,4 +1,5 @@
 ﻿using EticaretAPI.Domain.Entities;
+using EticaretAPI.Domain.Entities.Common;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -18,6 +19,23 @@ namespace EticaretAPI.Persistance
         public DbSet<Order> Orders { get; set; }
         public DbSet<OrderProduct> OrderProducts { get; set; }
         public DbSet<ShopAssistant> ShopAssistants { get; set; }
+
+        public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
+        {
+
+            var datas = ChangeTracker.Entries<BaseEntity>();
+
+            foreach (var data in datas) 
+            {
+                _ = data.State switch
+                {
+                    EntityState.Added => data.Entity.CreatedDate = DateTime.UtcNow,
+                    EntityState.Modified => data.Entity.UpdatedDate = DateTime.UtcNow
+                };
+            }
+
+            return base.SaveChangesAsync(cancellationToken);
+        }
 
     }
 }

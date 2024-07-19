@@ -30,6 +30,7 @@ namespace EticaretAPI.API.Controllers
                 new() { CategoryName = "modem"}
             });
             var count = await _categoryWriterepository.SaveAsync();
+
         }
     }
 }
