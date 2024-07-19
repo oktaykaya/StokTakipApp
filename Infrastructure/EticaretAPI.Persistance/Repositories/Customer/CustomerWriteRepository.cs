@@ -1,6 +1,5 @@
 ﻿using EticaretAPI.Application.Repositories;
 using EticaretAPI.Domain.Entities;
-using EticaretAPI.Persistance.c
 using System;
 using System.Collections.Generic;
 using System.Linq;

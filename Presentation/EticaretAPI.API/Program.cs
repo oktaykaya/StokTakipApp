@@ -1,6 +1,8 @@
 using EticaretAPI.Persistance;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.EntityFrameworkCore.Design;
+using EticaretAPI.Application.Repositories;
+using EticaretAPI.Persistance.Repositories;
 
 var builder = WebApplication.CreateBuilder(args);
 
