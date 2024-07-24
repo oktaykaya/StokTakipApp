@@ -3,6 +3,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.EntityFrameworkCore.Design;
 using EticaretAPI.Application.Repositories;
 using EticaretAPI.Persistance.Repositories;
+using EticaretAPI.API;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -29,10 +30,12 @@ if (app.Environment.IsDevelopment())
 
 app.UseCors();
 
-app.UseHttpsRedirection();
+app.UseMiddleware<AbstractExceptionHandlerMiddleware>();
+
 
 app.UseAuthorization();
 
 app.MapControllers();
+
 
 app.Run();

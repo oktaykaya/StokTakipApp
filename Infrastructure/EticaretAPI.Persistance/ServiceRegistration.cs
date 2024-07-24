@@ -20,6 +20,7 @@ namespace EticaretAPI.Persistance
                 options.UseSqlServer(Configuration.ConnectionString));
 
             services.AddScoped<IProductWriteRepository, ProductWriteRepository>();
+            services.AddScoped<IProductReadRepository, ProductReadRepository>();
             services.AddScoped<ICategoryReadRepository, CategoryReadRepository>();
             services.AddScoped<ICategoryWriteRepository, CategoryWriteRepository>();
             services.AddScoped<ICustomerReadRepository, CustomerReadRepository>();

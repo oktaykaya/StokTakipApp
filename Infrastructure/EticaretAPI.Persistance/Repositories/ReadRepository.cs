@@ -26,7 +26,6 @@ namespace EticaretAPI.Persistance.Repositories
             if (!tracking)
                 query = query.AsNoTracking();
             return query;
-            
         }
         public async Task<T> GetByIdAsync(string id, bool tracking = true)
         {
