@@ -30,7 +30,7 @@ namespace EticaretAPI.API.Controllers
         }
 
         [HttpGet("{id}")]
-        public async Task<IActionResult> Get(string id)
+        public async Task<IActionResult> Get(int id)
         {
             return Ok(await _productsReadrepository.GetByIdAsync(id,false));
         }
@@ -46,7 +46,9 @@ namespace EticaretAPI.API.Controllers
                 ProductCode = model.ProductCode,
                 Price = model.Price,
                 ManufactureDate = model.ManufactureDate,
-                Quantity = model.Quantity
+                Quantity = model.Quantity,
+                CategoryId = 1
+              
             });
             await _productsWriterepository.SaveAsync();
             return StatusCode((int)HttpStatusCode.Created);
@@ -55,10 +57,10 @@ namespace EticaretAPI.API.Controllers
         [HttpPut]
         public async Task<IActionResult> Put(VM_Update_Products model)
         {
-            Product product = await _productsReadrepository.GetByIdAsync(model.Id);
-            product.ProductName = model.ProductName;
-            product.Feature1 = model.Feature1;
-            product.Feature2 = model.Feature2;
+            Product product = await _productsReadrepository.GetByIdAsync(39);
+            product.ProductName = "asdasdasd";
+            product.Feature1 = "model.Feature1";
+            product.Feature2 = "model.Feature2";
             product.ProductCode = model.ProductCode;
             product.Price = model.Price;
             product.ManufactureDate = model.ManufactureDate;
@@ -68,7 +70,7 @@ namespace EticaretAPI.API.Controllers
         }
 
         [HttpDelete("{id}")]
-        public async Task<IActionResult> Delete(String id)
+        public async Task<IActionResult> Delete(int id)
         {
             await _productsWriterepository.RemoveAsync(id);
             await _productsWriterepository.SaveAsync();
