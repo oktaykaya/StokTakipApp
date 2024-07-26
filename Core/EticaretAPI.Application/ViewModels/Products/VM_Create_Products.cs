@@ -8,7 +8,7 @@ namespace EticaretAPI.Application.ViewModels.Products
 {
     public class VM_Create_Products
     {
-        public string CategoryId { get; set; }
+        public int CategoryId { get; set; }
         public string ProductCode { get; set; }
         public string ProductName { get; set; }
         public decimal Price { get; set; }
