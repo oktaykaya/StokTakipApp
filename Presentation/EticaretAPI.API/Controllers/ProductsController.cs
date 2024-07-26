@@ -38,7 +38,11 @@ namespace EticaretAPI.API.Controllers
         [HttpPost]
         public async Task<IActionResult> Post(VM_Create_Products model)
         {
-            _productsWriterepository.AddAsync(new()
+            if (ModelState.IsValid) 
+            {
+                
+            }
+            await _productsWriterepository.AddAsync(new()
             {
                 ProductName = model.ProductName,
                 Feature1 = model.Feature1,
