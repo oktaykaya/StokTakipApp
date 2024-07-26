@@ -1,4 +1,5 @@
 using EticaretAPI.Application.Repositories;
+using EticaretAPI.Application.RequestParameters;
 using EticaretAPI.Application.ViewModels.Categories;
 using EticaretAPI.Application.ViewModels.Products;
 using EticaretAPI.Domain.Entities;
@@ -24,9 +25,29 @@ namespace EticaretAPI.API.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> Get()
+        public async Task<IActionResult> Get([FromQuery]Pagination pagination)
         {
-          return Ok( _productsReadrepository.GetAll(false));
+            var totalCount = _productsReadrepository.GetAll(false).Count();
+            var products = _productsReadrepository.GetAll(false).Skip(pagination.Page * pagination.Size).Take(pagination.Size).Select(p => new
+            {
+                p.Id,
+                p.CategoryId,
+                p.ProductCode,
+                p.ProductName,
+                p.Price,
+                p.ManufactureDate,
+                p.Quantity,
+                p.Feature1,
+                p.Feature2,
+                p.CreatedDate,
+                p.UpdatedDate
+            }).ToList();
+
+          return Ok(new
+          {
+              totalCount,
+              products
+          });
         }
 
         [HttpGet("{id}")]
@@ -38,10 +59,6 @@ namespace EticaretAPI.API.Controllers
         [HttpPost]
         public async Task<IActionResult> Post(VM_Create_Products model)
         {
-            if (ModelState.IsValid) 
-            {
-                
-            }
             await _productsWriterepository.AddAsync(new()
             {
                 ProductName = model.ProductName,
@@ -62,9 +79,9 @@ namespace EticaretAPI.API.Controllers
         public async Task<IActionResult> Put(VM_Update_Products model)
         {
             Product product = await _productsReadrepository.GetByIdAsync(39);
-            product.ProductName = "asdasdasd";
-            product.Feature1 = "model.Feature1";
-            product.Feature2 = "model.Feature2";
+            product.ProductName = model.ProductName;
+            product.Feature1 = model.Feature1;
+            product.Feature2 = model.Feature2;
             product.ProductCode = model.ProductCode;
             product.Price = model.Price;
             product.ManufactureDate = model.ManufactureDate;
