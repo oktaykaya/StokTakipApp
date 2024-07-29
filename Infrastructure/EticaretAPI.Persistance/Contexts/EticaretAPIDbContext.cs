@@ -19,6 +19,9 @@ namespace EticaretAPI.Persistance
         public DbSet<Order> Orders { get; set; }
         public DbSet<OrderProduct> OrderProducts { get; set; }
         public DbSet<ShopAssistant> ShopAssistants { get; set; }
+        public DbSet<Domain.Entities.File> Files { get; set; }
+        public DbSet<ProductImageFile> productImageFiles { get; set; }
+        public DbSet<InvoiceFile> InvoiceFiles { get; set; }
 
         public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
         {

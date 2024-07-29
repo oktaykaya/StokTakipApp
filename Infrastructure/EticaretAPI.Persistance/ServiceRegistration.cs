@@ -31,6 +31,12 @@ namespace EticaretAPI.Persistance
             services.AddScoped<IOrderProductWriteRepository, OrderProductWriteRepository>();
             services.AddScoped<IShopAssistantReadRepository, ShopAssistantReadRepository>();
             services.AddScoped<IShopAssistantWriteRepository, ShopAssistantWriteRepository>();
+            services.AddScoped<IFileReadRepository, FileReadRepository>();
+            services.AddScoped<IFileWriteRepository, FileWriteRepository>();
+            services.AddScoped<IProductImageFileReadRepository, ProductImageFileReadRepository>();
+            services.AddScoped<IProductImageFileWriteRepository, ProductImageFileWriteRepository>();
+            services.AddScoped<IInvoiceFileReadRepository, InvoiceFileReadRepository>();
+            services.AddScoped<IInvoiceFileWriteRepository, InvoiceFileWriteRepository>();
 
         }
     }

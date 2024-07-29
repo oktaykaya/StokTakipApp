@@ -10,7 +10,7 @@ namespace EticaretAPI.Domain.Entities.Common
     {
         public int Id { get; set; }
         public DateTime CreatedDate { get; set; }
-        public DateTime UpdatedDate { get; set; }
+        virtual public DateTime UpdatedDate { get; set; }
 
     }
 }
