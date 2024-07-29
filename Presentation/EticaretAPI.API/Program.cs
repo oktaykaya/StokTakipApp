@@ -7,6 +7,7 @@ using EticaretAPI.API;
 using FluentValidation.AspNetCore;
 using EticaretAPI.Application.Validators.Products;
 using EticaretAPI.Infrastructure.Filters;
+using EticaretAPI.Infrastructure;
 
 
 
@@ -14,6 +15,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Servisleri ekle
 builder.Services.AddPersistenceServices();
+builder.Services.AddInfrastructureServices();
 
 builder.Services.AddCors(options => options.AddDefaultPolicy(policy => policy.WithOrigins("http://localhost:4200", "https://localhost:4200").AllowAnyHeader().AllowAnyMethod()));
 
