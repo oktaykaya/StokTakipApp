@@ -8,6 +8,8 @@ using FluentValidation.AspNetCore;
 using EticaretAPI.Application.Validators.Products;
 using EticaretAPI.Infrastructure.Filters;
 using EticaretAPI.Infrastructure;
+using EticaretAPI.Infrastructure.services.Storage.Local;
+using EticaretAPI.Infrastructure.Enums;
 
 
 
@@ -16,6 +18,8 @@ var builder = WebApplication.CreateBuilder(args);
 // Servisleri ekle
 builder.Services.AddPersistenceServices();
 builder.Services.AddInfrastructureServices();
+//builder.Services.AddStorage(StorageType.Azure);
+builder.Services.AddStorage(StorageType.Local);
 
 builder.Services.AddCors(options => options.AddDefaultPolicy(policy => policy.WithOrigins("http://localhost:4200", "https://localhost:4200").AllowAnyHeader().AllowAnyMethod()));
 
