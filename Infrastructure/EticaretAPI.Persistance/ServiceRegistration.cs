@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using EticaretAPI.Application.Repositories;
 using EticaretAPI.Persistance.Repositories;
+using EticaretAPI.Application.Abstractions.Storage;
 
 namespace EticaretAPI.Persistance
 
@@ -31,6 +32,15 @@ namespace EticaretAPI.Persistance
             services.AddScoped<IOrderProductWriteRepository, OrderProductWriteRepository>();
             services.AddScoped<IShopAssistantReadRepository, ShopAssistantReadRepository>();
             services.AddScoped<IShopAssistantWriteRepository, ShopAssistantWriteRepository>();
+            services.AddScoped<IFileReadRepository, FileReadRepository>();
+            services.AddScoped<IFileWriteRepository, FileWriteRepository>();
+            services.AddScoped<IProductImageFileReadRepository, ProductImageFileReadRepository>();
+            services.AddScoped<IProductImageFileWriteRepository, ProductImageFileWriteRepository>();
+            services.AddScoped<IInvoiceFileReadRepository, InvoiceFileReadRepository>();
+            services.AddScoped<IInvoiceFileWriteRepository, InvoiceFileWriteRepository>();
+           // services.AddScoped<IStorageService, StorageService>();
+
+
 
         }
     }
