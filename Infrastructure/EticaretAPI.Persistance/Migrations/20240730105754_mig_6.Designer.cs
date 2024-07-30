@@ -4,6 +4,7 @@ using EticaretAPI.Persistance;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace EticaretAPI.Persistance.Migrations
 {
     [DbContext(typeof(EticaretAPIDbContext))]
-    partial class EticaretAPIDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240730105754_mig_6")]
+    partial class mig_6
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -290,21 +293,6 @@ namespace EticaretAPI.Persistance.Migrations
                     b.ToTable("OrderProductProduct");
                 });
 
-            modelBuilder.Entity("ProductProductImageFile", b =>
-                {
-                    b.Property<int>("ProductImageFilesId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("ProductsId")
-                        .HasColumnType("int");
-
-                    b.HasKey("ProductImageFilesId", "ProductsId");
-
-                    b.HasIndex("ProductsId");
-
-                    b.ToTable("ProductProductImageFile");
-                });
-
             modelBuilder.Entity("EticaretAPI.Domain.Entities.InvoiceFile", b =>
                 {
                     b.HasBaseType("EticaretAPI.Domain.Entities.File");
@@ -318,6 +306,11 @@ namespace EticaretAPI.Persistance.Migrations
             modelBuilder.Entity("EticaretAPI.Domain.Entities.ProductImageFile", b =>
                 {
                     b.HasBaseType("EticaretAPI.Domain.Entities.File");
+
+                    b.Property<int>("productId")
+                        .HasColumnType("int");
+
+                    b.HasIndex("productId");
 
                     b.HasDiscriminator().HasValue("ProductImageFile");
                 });
@@ -378,19 +371,15 @@ namespace EticaretAPI.Persistance.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("ProductProductImageFile", b =>
+            modelBuilder.Entity("EticaretAPI.Domain.Entities.ProductImageFile", b =>
                 {
-                    b.HasOne("EticaretAPI.Domain.Entities.ProductImageFile", null)
-                        .WithMany()
-                        .HasForeignKey("ProductImageFilesId")
+                    b.HasOne("EticaretAPI.Domain.Entities.Product", "product")
+                        .WithMany("productImageFiles")
+                        .HasForeignKey("productId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("EticaretAPI.Domain.Entities.Product", null)
-                        .WithMany()
-                        .HasForeignKey("ProductsId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                    b.Navigation("product");
                 });
 
             modelBuilder.Entity("EticaretAPI.Domain.Entities.Category", b =>
@@ -407,6 +396,11 @@ namespace EticaretAPI.Persistance.Migrations
                 {
                     b.Navigation("OrderProduct")
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("EticaretAPI.Domain.Entities.Product", b =>
+                {
+                    b.Navigation("productImageFiles");
                 });
 
             modelBuilder.Entity("EticaretAPI.Domain.Entities.ShopAssistant", b =>

@@ -20,5 +20,7 @@ namespace EticaretAPI.Domain.Entities
 
         public ICollection<OrderProduct> Orders { get; set; }
         public Category Category { get; set; }
+
+        public ICollection<ProductImageFile> ProductImageFiles { get; set; }
     }
 }
