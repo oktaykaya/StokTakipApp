@@ -9,6 +9,7 @@ using EticaretAPI.Infrastructure.services.Storage;
 using EticaretAPI.Persistance.Repositories;
 using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using System.Net;
 
 namespace EticaretAPI.API.Controllers
@@ -114,7 +115,7 @@ namespace EticaretAPI.API.Controllers
             await _productsWriterepository.SaveAsync();
             return Ok();
         }
-
+        /*
         [HttpPost("[action]")]
         public async Task<IActionResult> Upload(int id)
         {
@@ -122,14 +123,14 @@ namespace EticaretAPI.API.Controllers
 
             Product product = await _productsReadrepository.GetByIdAsync(id);
 
-            await _productImageFileWriterepository.AddRangeAsync(result.Select(r => new ProductImageFile
+            /*await _productImageFileWriterepository.AddRangeAsync(result.Select(r => new ProductImageFile
             {
                 FileName = r.fileName,
                 Path = r.pathOrContainerName,
                 Storage = _storageService.StorageName,
                 Products = new List<Product>() {product}
-            }).ToList());
-
+            }).ToList());*/
+        /*
             await _productImageFileWriterepository.SaveAsync();
 
             return Ok();
@@ -160,7 +161,18 @@ namespace EticaretAPI.API.Controllers
             ////}).ToList());
             ////await _fileWriterepository.SaveAsync();
             //return Ok();
-        }
+        }/*d
+        
+        [HttpGet("[action]/{id}")]
+        public async Task<IActionResult> GetProductImages(int id)
+        {
+            Product? product = await _productsReadrepository.Table.Include(p => p.ProductImageFiles).FirstOrDefaultAsync(p => p.Id == id);
 
+            return Ok(product.ProductImageFiles.Select(p => new
+            {
+                p.Path,
+                p.FileName
+            }));
+        }*/
     }
 }

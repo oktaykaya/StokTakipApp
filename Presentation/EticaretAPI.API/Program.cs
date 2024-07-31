@@ -10,6 +10,7 @@ using EticaretAPI.Infrastructure.Filters;
 using EticaretAPI.Infrastructure;
 using EticaretAPI.Infrastructure.services.Storage.Local;
 using EticaretAPI.Infrastructure.Enums;
+using EticaretAPI.Application.Validators.Customers;
 
 
 
@@ -28,6 +29,9 @@ builder.Services.AddControllers(options => options.Filters.Add<ValidationFilter>
     .AddFluentValidation(configuration => configuration.RegisterValidatorsFromAssemblyContaining<CreateProductValidator>())
     .ConfigureApiBehaviorOptions(options => options.SuppressModelStateInvalidFilter = true);
 
+builder.Services.AddControllers(options => options.Filters.Add<ValidationFilter>())
+    .AddFluentValidation(configuration => configuration.RegisterValidatorsFromAssemblyContaining<CreateCustomersValidator>())
+    .ConfigureApiBehaviorOptions(options => options.SuppressModelStateInvalidFilter = true);
 // Swagger/OpenAPI yapýlandýrmasý
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
