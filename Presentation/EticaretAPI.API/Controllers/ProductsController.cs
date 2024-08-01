@@ -104,6 +104,7 @@ namespace EticaretAPI.API.Controllers
             product.Price = model.Price;
             product.ManufactureDate = model.ManufactureDate;
             product.Quantity = model.Quantity;
+            product.CategoryId = model.CategoryId;
             await _productsWriterepository.SaveAsync();
             return Ok();
         }

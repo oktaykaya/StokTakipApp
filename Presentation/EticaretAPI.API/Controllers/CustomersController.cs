@@ -38,7 +38,9 @@ namespace EticaretAPI.API.Controllers
                 p.Address,
                 p.Tc,
                 p.CreatedDate,
-                p.UpdatedDate
+                p.UpdatedDate,
+                p.BirthDate,
+                p.Email
             }).ToList();
 
             return Ok(new
@@ -59,6 +61,8 @@ namespace EticaretAPI.API.Controllers
                 Phone = model.Phone,
                 Address = model.Address,
                 Tc = model.Tc,
+                Email = model.Email,
+                BirthDate = model.BirthDate,
             });
             await _customerWriteRepository.SaveAsync();
             return StatusCode((int)HttpStatusCode.Created);
@@ -70,10 +74,12 @@ namespace EticaretAPI.API.Controllers
             Customer customer = await _customerReadRepository.GetByIdAsync(1);
             customer.FirstName = model.FirstName;
             customer.LastName = model.LastName;
-            customer.Gender = model.Gender;
+           // customer.Gender = model.Gender;
             customer.Phone = model.Phone;
             customer.Address = model.Address;
             customer.Tc = model.Tc;
+           // customer.Email = mode,
+           // customer.BirthDate = model.BirthDate,
             await _customerWriteRepository.SaveAsync();
             return Ok();
         }

@@ -16,5 +16,6 @@ namespace EticaretAPI.Application.ViewModels.Products
         public int Quantity { get; set; }
         public string Feature1 { get; set; }
         public string Feature2 { get; set; }
+        public int CategoryId { get; set; }
     }
 }
