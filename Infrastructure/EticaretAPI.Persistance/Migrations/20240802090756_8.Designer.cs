@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace EticaretAPI.Persistance.Migrations
 {
     [DbContext(typeof(EticaretAPIDbContext))]
-    [Migration("20240801082502_gender")]
-    partial class gender
+    [Migration("20240802090756_8")]
+    partial class _8
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

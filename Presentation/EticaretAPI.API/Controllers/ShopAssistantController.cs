@@ -3,7 +3,9 @@ using EticaretAPI.Application.ViewModels.ShopAssistant;
 using EticaretAPI.Domain.Entities;
 using EticaretAPI.Persistance.Repositories;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using System.Net;
+using System.Security.Cryptography;
 
 namespace EticaretAPI.API.Controllers
 {
@@ -43,10 +45,11 @@ namespace EticaretAPI.API.Controllers
         [HttpPost]
         public async Task<IActionResult> Post(VM_Create_ShopAssistant model)
         {
+
             await _shopAssistantwriteRepository.AddAsync(new()
             {
                 UserMail = model.UserMail,
-                Password = model.Password,
+                Password = model.Password
             });
             await _shopAssistantwriteRepository.SaveAsync();
             return StatusCode((int)HttpStatusCode.Created);
@@ -59,6 +62,19 @@ namespace EticaretAPI.API.Controllers
             await _shopAssistantwriteRepository.RemoveAsync(id);
             await _shopAssistantwriteRepository.SaveAsync();
             return Ok();
+        }
+
+        [HttpPost("login")]
+        public async Task<IActionResult> Login([FromBody] VM_Create_ShopAssistant model)
+        {
+            var user = await _shopAssistantreadRepository.GetWhere(x => x.UserMail == model.UserMail && x.Password == model.Password).FirstOrDefaultAsync();
+
+            if (user == null)
+            {
+                return Unauthorized(new { message = "Invalid email or password." });
+            }
+
+            return Ok(new { message = "Login successful" });
         }
     }
 }
